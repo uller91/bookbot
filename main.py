@@ -1,13 +1,20 @@
 def main():
-    file_contents = open_file("books/frankenstein.txt")     #in the solution the path is a variable
+    path = "books/frankenstein.txt"
+    file_contents = open_file(path)
     count_words = word_count(file_contents)
-    print(f"{count_words} words was found in this document")
     count_characters = characters_count(file_contents)
-    #print(count_characters)
     divided_dict = divide_dict(count_characters)
-    #print(divided_dict)
     divided_dict.sort(reverse=True, key = sort_on)
-    print(divided_dict)
+    report(path, count_words, divided_dict)
+    
+
+def report(path, words, list):    
+    print(f"--- Begin report of {path} ---\n"
+        f"{words} words was found in this document\n")
+    for dict in list:
+        print(f"The '{dict["letter"]}' character was found {dict["number"]} times")
+    print("--- End report ---")
+
 
 def sort_on(dict):
     return dict["number"]
